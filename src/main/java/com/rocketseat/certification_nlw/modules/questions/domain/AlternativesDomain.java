@@ -1,4 +1,4 @@
-package com.rocketseat.certification_nlw.modules.students.domain;
+package com.rocketseat.certification_nlw.modules.questions.domain;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -17,40 +17,27 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "tb_alternatives")
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
-@Entity
-@Table(name = "tb_answers")
-public class AnswersCertificationsDomain {
+public class AlternativesDomain {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    private String description;
+
     @Column(name = "is_correct")
     private boolean isCorrect;
-    
+
     @CreationTimestamp
     private LocalDate createdAt;
-    
-    @Column(name = "question_id")
-    private UUID questionID;
-    
-    @Column(name = "answer_id")
-    private UUID answerId;
-    
-    @Column(name = "student_id")
-    private UUID studentId;
-    
-    @ManyToOne()
-    @JoinColumn(name = "student_id", insertable = false, updatable = false)
-    private StudentDomain studentDomain;
 
-    @Column(name = "certification_id")
-    private UUID certificationID;
-    
-    @ManyToOne()
-    @JoinColumn(name = "certification_id", insertable = false, updatable = false)
-    private CertificationStudentDomain certificationStudentDomain;
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private QuestionDomain question;
 }
