@@ -36,7 +36,7 @@ public class CreateSeed {
     //?
     private void executeSqlFile(String dir){
         try{
-            String sqlSscript = new String(Files.readAllBytes(Paths.get(dir)));
+            String sqlScript = new String(Files.readAllBytes(Paths.get(dir)));
             jdbcTemplate.execute(sqlScript);
             System.out.println("SEED executed");
         }

@@ -5,6 +5,10 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,12 +36,15 @@ public class AlternativesDomain {
     private String description;
 
     @Column(name = "is_correct")
+    // @JsonIgnore
     private boolean isCorrect;
 
     @CreationTimestamp
     private LocalDate createdAt;
 
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "question_id", insertable = false, updatable = false)
+    
+    @JsonBackReference
     private QuestionDomain question;
 }
